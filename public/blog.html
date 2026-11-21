@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blog – Imaan Fihlani</title>
+
+  <!-- Primary Meta Tags -->
+  <meta name="description" content="Insights and articles on social media strategy, brand growth, and digital marketing from Imaan Fihlani." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://imaanfihlani.com/blog" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://imaanfihlani.com/blog" />
+  <meta property="og:title" content="Blog – Imaan Fihlani" />
+  <meta property="og:description" content="Insights and articles on social media strategy, brand growth, and digital marketing." />
+  <meta property="og:image" content="https://imaanfihlani.com/images/og-blog.jpg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Blog – Imaan Fihlani" />
+  <meta name="twitter:description" content="Insights and articles on social media strategy, brand growth, and digital marketing." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/IF-favicon.png" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/index.css" />
+
+  <!-- Blog page specific styles -->
+  <style>
+    .blog-page {
+      padding-top: 120px;
+    }
+    .blog-hero {
+      text-align: center;
+      padding: 4rem 0 3rem;
+      border-bottom: 1px solid rgba(201,168,76,0.15);
+    }
+    .blog-hero h1 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(2.8rem, 5vw, 4.2rem);
+      color: #FFFFFF;
+      margin-bottom: 0.5rem;
+    }
+    .blog-hero p {
+      color: #B0B0B0;
+      font-size: 1.2rem;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .blog-layout {
+      display: grid;
+      grid-template-columns: 1fr 320px;
+      gap: 3rem;
+      padding: 3rem 0 5rem;
+    }
+    .blog-main {
+      min-width: 0;
+    }
+    .blog-sidebar {
+      position: sticky;
+      top: 100px;
+      align-self: start;
+    }
+    .sidebar-widget {
+      background: #141414;
+      border: 1px solid rgba(201,168,76,0.08);
+      border-radius: 8px;
+      padding: 1.8rem;
+      margin-bottom: 2rem;
+    }
+    .sidebar-widget h4 {
+      font-family: 'Playfair Display', serif;
+      color: #FFFFFF;
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 2px solid rgba(201,168,76,0.15);
+    }
+    .search-box {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .search-box input {
+      flex: 1;
+      padding: 0.8rem 1rem;
+      background: #0A0A0A;
+      border: 1px solid rgba(201,168,76,0.15);
+      border-radius: 4px;
+      color: #FFFFFF;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .search-box input:focus {
+      border-color: #C9A84C;
+    }
+    .search-box button {
+      padding: 0.8rem 1.2rem;
+      background: #C9A84C;
+      border: none;
+      border-radius: 4px;
+      color: #0A0A0A;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+    .search-box button:hover {
+      background: #D4B85C;
+    }
+    .category-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+    .category-list li {
+      padding: 0.6rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .category-list li:last-child {
+      border-bottom: none;
+    }
+    .category-list a {
+      color: #B0B0B0;
+      text-decoration: none;
+      transition: color 0.3s;
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.9rem;
+      cursor: pointer;
+    }
+    .category-list a:hover {
+      color: #C9A84C;
+    }
+    .category-list .count {
+      color: #666;
+      font-size: 0.8rem;
+    }
+    .tag-cloud {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+    .tag-cloud a {
+      padding: 0.3rem 0.8rem;
+      background: #0A0A0A;
+      border: 1px solid rgba(201,168,76,0.1);
+      border-radius: 20px;
+      color: #B0B0B0;
+      font-size: 0.8rem;
+      text-decoration: none;
+      transition: all 0.3s;
+      cursor: pointer;
+    }
+    .tag-cloud a:hover {
+      border-color: #C9A84C;
+      color: #C9A84C;
+      background: rgba(201,168,76,0.05);
+    }
+    .recent-post {
+      display: flex;
+      gap: 1rem;
+      padding: 0.8rem 0;
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+    .recent-post:last-child {
+      border-bottom: none;
+    }
+    .recent-post img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 4px;
+      flex-shrink: 0;
+    }
+    .recent-post .info {
+      flex: 1;
+      min-width: 0;
+    }
+    .recent-post .info a {
+      color: #FFFFFF;
+      text-decoration: none;
+      font-size: 0.9rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      transition: color 0.3s;
+    }
+    .recent-post .info a:hover {
+      color: #C9A84C;
+    }
+    .recent-post .info .date {
+      color: #666;
+      font-size: 0.75rem;
+      display: block;
+      margin-top: 0.2rem;
+    }
+    .social-icons {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+    }
+    .social-icons a {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #0A0A0A;
+      border: 1px solid rgba(201,168,76,0.1);
+      border-radius: 50%;
+      color: #B0B0B0;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+    .social-icons a:hover {
+      border-color: #C9A84C;
+      color: #C9A84C;
+      transform: translateY(-2px);
+    }
+    .featured-post {
+      background: #141414;
+      border: 1px solid rgba(201,168,76,0.08);
+      border-radius: 8px;
+      overflow: hidden;
+      margin-bottom: 3rem;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2rem;
+      padding: 2rem;
+      cursor: pointer;
+      transition: border-color 0.3s;
+    }
+    .featured-post:hover {
+      border-color: #C9A84C;
+    }
+    .featured-post .image {
+      border-radius: 8px;
+      overflow: hidden;
+      min-height: 300px;
+      background: #1A1A1A;
+    }
+    .featured-post .image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .featured-post .content {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .featured-post .badge {
+      display: inline-block;
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: #C9A84C;
+      background: rgba(201,168,76,0.1);
+      padding: 0.3rem 0.8rem;
+      border-radius: 20px;
+      margin-bottom: 0.8rem;
+      width: fit-content;
+    }
+    .featured-post h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(1.6rem, 2.5vw, 2.4rem);
+      color: #FFFFFF;
+      margin-bottom: 0.5rem;
+    }
+    .featured-post .excerpt {
+      color: #B0B0B0;
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 1.2rem;
+    }
+    .featured-post .meta {
+      color: #666;
+      font-size: 0.85rem;
+    }
+    .featured-post .meta .author {
+      color: #C9A84C;
+    }
+    .blog-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 2rem;
+    }
+    .blog-card {
+      background: #141414;
+      border: 1px solid rgba(201,168,76,0.08);
+      overflow: hidden;
+      transition: border-color 0.3s, transform 0.3s;
+      cursor: pointer;
+    }
+    .blog-card:hover {
+      border-color: #C9A84C;
+      transform: translateY(-4px);
+    }
+    .blog-card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      background: #1A1A1A;
+    }
+    .blog-card-body {
+      padding: 1.6rem 1.8rem 2rem;
+    }
+    .blog-card-date {
+      font-size: 0.75rem;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: #C9A84C;
+      margin-bottom: 0.4rem;
+    }
+    .blog-card-title {
+      font-family: 'Playfair Display', serif;
+      font-size: 1.3rem;
+      color: #FFFFFF;
+      margin-bottom: 0.6rem;
+    }
+    .blog-card-excerpt {
+      font-size: 0.95rem;
+      color: #B0B0B0;
+      margin-bottom: 1rem;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .blog-card-link {
+      color: #C9A84C;
+      font-weight: 500;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      text-decoration: none;
+    }
+    .blog-card-link i {
+      font-size: 0.7rem;
+      transition: transform 0.3s;
+    }
+    .blog-card-link:hover i {
+      transform: translateX(4px);
+    }
+    .pagination {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 2.5rem;
+      flex-wrap: wrap;
+    }
+    .pagination button {
+      padding: 0.5rem 1rem;
+      background: #141414;
+      border: 1px solid rgba(201,168,76,0.15);
+      color: #B0B0B0;
+      border-radius: 4px;
+      cursor: pointer;
+      transition: all 0.3s;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.9rem;
+    }
+    .pagination button:hover {
+      border-color: #C9A84C;
+      color: #C9A84C;
+    }
+    .pagination button.active {
+      background: #C9A84C;
+      color: #0A0A0A;
+      border-color: #C9A84C;
+    }
+    .pagination button:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+    .pagination button:disabled:hover {
+      border-color: rgba(201,168,76,0.15);
+      color: #B0B0B0;
+    }
+    /* Blog Single Post */
+    .blog-single {
+      padding: 2rem 0 3rem;
+    }
+    .blog-single .back-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: #B0B0B0;
+      text-decoration: none;
+      margin-bottom: 2rem;
+      transition: color 0.3s;
+    }
+    .blog-single .back-link:hover {
+      color: #C9A84C;
+    }
+    .blog-single .post-header {
+      margin-bottom: 2rem;
+    }
+    .blog-single .post-header .date {
+      color: #C9A84C;
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .blog-single .post-header h1 {
+      font-family: 'Playfair Display', serif;
+      color: #FFFFFF;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      margin-bottom: 0.5rem;
+    }
+    .blog-single .post-header .author {
+      color: #666;
+      font-size: 0.9rem;
+    }
+    .blog-single .post-header .author span {
+      color: #C9A84C;
+    }
+    .blog-single .post-image {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 8px;
+      margin-bottom: 2rem;
+    }
+    .blog-single .post-content {
+      color: #D0D0D0;
+      line-height: 1.8;
+    }
+    .blog-single .post-content h2,
+    .blog-single .post-content h3 {
+      color: #FFFFFF;
+      font-family: 'Playfair Display', serif;
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+    .blog-single .post-content p {
+      margin-bottom: 1.2rem;
+    }
+    .blog-single .post-content ul,
+    .blog-single .post-content ol {
+      margin-left: 1.5rem;
+      margin-bottom: 1.2rem;
+    }
+    .blog-single .post-content blockquote {
+      border-left: 3px solid #C9A84C;
+      padding-left: 1.5rem;
+      margin: 1.5rem 0;
+      font-style: italic;
+      color: #B0B0B0;
+    }
+    .blog-single .post-content img {
+      max-width: 100%;
+      border-radius: 8px;
+      margin: 1.5rem 0;
+    }
+    .blog-single .post-footer {
+      margin-top: 3rem;
+      padding-top: 2rem;
+      border-top: 1px solid rgba(255,255,255,0.08);
+    }
+    .blog-single .post-footer .share-label {
+      color: #888;
+      font-size: 0.8rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 0.8rem;
+    }
+    .blog-single .post-footer .share-buttons {
+      display: flex;
+      gap: 0.8rem;
+      flex-wrap: wrap;
+    }
+    .blog-single .post-footer .share-buttons a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 44px;
+      height: 44px;
+      background: #141414;
+      border: 1px solid rgba(201,168,76,0.1);
+      border-radius: 50%;
+      color: #B0B0B0;
+      transition: all 0.3s;
+      text-decoration: none;
+    }
+    .blog-single .post-footer .share-buttons a:hover {
+      border-color: #C9A84C;
+      color: #C9A84C;
+      transform: translateY(-2px);
+    }
+    .blog-single .post-footer .share-buttons a.linkedin:hover {
+      border-color: #0A66C2;
+      color: #0A66C2;
+    }
+    .blog-single .post-footer .share-buttons a.twitter:hover {
+      border-color: #000000;
+      color: #000000;
+    }
+    .blog-single .post-footer .share-buttons a.facebook:hover {
+      border-color: #1877F2;
+      color: #1877F2;
+    }
+    .blog-single .post-footer .share-buttons a.whatsapp:hover {
+      border-color: #25D366;
+      color: #25D366;
+    }
+    .blog-single .post-footer .share-buttons a.email:hover {
+      border-color: #C9A84C;
+      color: #C9A84C;
+    }
+    /* Responsive */
+    @media (max-width: 992px) {
+      .blog-layout {
+        grid-template-columns: 1fr;
+      }
+      .blog-sidebar {
+        position: static;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 2rem;
+      }
+      .featured-post {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+        padding: 1.5rem;
+      }
+      .featured-post .image {
+        min-height: 200px;
+      }
+    }
+    @media (max-width: 768px) {
+      .blog-page {
+        padding-top: 90px;
+      }
+      .blog-hero {
+        padding: 2rem 0 1.5rem;
+      }
+      .blog-layout {
+        padding: 1.5rem 0 3rem;
+        gap: 2rem;
+      }
+      .blog-sidebar {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      .sidebar-widget {
+        padding: 1.2rem;
+      }
+      .featured-post {
+        padding: 1rem;
+      }
+      .featured-post .image {
+        min-height: 150px;
+      }
+      .blog-list {
+        grid-template-columns: 1fr;
+      }
+    }
+    @media (max-width: 480px) {
+      .blog-hero h1 {
+        font-size: 2rem;
+      }
+      .blog-hero p {
+        font-size: 1rem;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="s-header" id="header">
+    <div class="header-inner">
+      <div class="header-logo">
+        <a href="/">
+          <img src="images/IF-favicon.png" alt="Imaan Fihlani" loading="lazy" />
+          <span class="logo-name">Imaan<span>Fihlani</span></span>
+        </a>
+      </div>
+      <nav class="header-nav-wrap" id="navWrap">
+        <ul class="header-nav">
+          <li><a href="/">Home</a></li>
+          <li><a href="/#about">About</a></li>
+          <li><a href="/#services">Services</a></li>
+          <li><a href="/#portfolio">Portfolio</a></li>
+          <li><a href="/blog" class="active">Blog</a></li>
+          <li><a href="/#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="header-menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== BLOG PAGE ===== -->
+  <main class="blog-page">
+
+    <!-- Blog Hero -->
+    <div class="container">
+      <div class="blog-hero">
+        <h1>Insights</h1>
+        <p>Thoughts, strategies, and insights on social media, branding, and digital growth.</p>
+      </div>
+    </div>
+
+    <!-- Blog Layout -->
+    <div class="container">
+      <div class="blog-layout">
+
+        <!-- MAIN CONTENT -->
+        <div class="blog-main" id="blogMain">
+          <!-- Posts rendered by JavaScript -->
+        </div>
+
+        <!-- SIDEBAR -->
+        <aside class="blog-sidebar" id="blogSidebar">
+          <!-- Search -->
+          <div class="sidebar-widget">
+            <h4>Search</h4>
+            <div class="search-box">
+              <input type="text" id="blogSearch" placeholder="Search posts..." />
+              <button id="searchBtn"><i class="fas fa-search"></i></button>
+            </div>
+          </div>
+
+          <!-- Categories -->
+          <div class="sidebar-widget" id="categoriesWidget">
+            <h4>Categories</h4>
+            <ul class="category-list" id="categoryList">
+              <!-- Rendered by JavaScript -->
+            </ul>
+          </div>
+
+          <!-- Recent Posts -->
+          <div class="sidebar-widget" id="recentWidget">
+            <h4>Recent Posts</h4>
+            <div id="recentPosts">
+              <!-- Rendered by JavaScript -->
+            </div>
+          </div>
+
+          <!-- Tags -->
+          <div class="sidebar-widget" id="tagsWidget">
+            <h4>Tags</h4>
+            <div class="tag-cloud" id="tagCloud">
+              <!-- Rendered by JavaScript -->
+            </div>
+          </div>
+
+          <!-- Social -->
+          <div class="sidebar-widget">
+            <h4>Connect</h4>
+            <div class="social-icons">
+              <a href="https://www.instagram.com/imaanfihlani_?igsh=b3FnamFoOHhlMXlz" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+              <a href="https://www.linkedin.com/in/lindelwa-imaan-fihlani-599bb1151" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+              <a href="https://www.facebook.com/lindelwa.fihlani" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+            </div>
+          </div>
+        </aside>
+
+      </div>
+    </div>
+
+  </main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="s-footer">
+  <div class="container">
+    <div class="footer-logo">
+      <img src="images/IF-favicon.png" alt="Imaan Fihlani" loading="lazy" />
+      <span class="logo-name">Imaan Fihlani</span>
+    </div>
+    <p class="footer-copy">
+      &copy; 2026 Imaan Fihlani Media. All rights reserved.
+    </p>
+    <div class="footer-social">
+      <a href="https://www.instagram.com/imaanfihlani_?igsh=b3FnamFoOHhlMXlz" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+        <i class="fab fa-instagram"></i>
+      </a>
+      <a href="https://www.linkedin.com/in/lindelwa-imaan-fihlani-599bb1151" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+      <a href="https://www.facebook.com/lindelwa.fihlani" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+        <i class="fab fa-facebook-f"></i>
+      </a>
+    </div>
+  </div>
+</footer>
+
+  <!-- Back to top -->
+  <a href="#top" id="goTop" class="go-top"><i class="fas fa-chevron-up"></i></a>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="js/blog.js"></script>
+</body>
+</html>

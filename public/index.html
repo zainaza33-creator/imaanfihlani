@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  
+  <!-- Primary Meta Tags -->
+  <title>Imaan Fihlani – Social Media Strategy & Management</title>
+  <meta name="description" content="Premium social media strategy and management for luxury brands. I help modern brands show up with intention, clarity, and consistency." />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://imaanfihlani.com/" />
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://imaanfihlani.com/" />
+  <meta property="og:title" content="Imaan Fihlani – Social Media Strategy & Management" />
+  <meta property="og:description" content="Premium social media strategy and management for luxury brands. I help modern brands show up with intention, clarity, and consistency." />
+  <meta property="og:image" content="https://imaanfihlani.com/images/og-image.jpg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Imaan Fihlani – Social Media Strategy & Management" />
+  <meta name="twitter:description" content="Premium social media strategy and management for luxury brands." />
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" href="images/IF-favicon.png" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- EmailJS SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+
+  <!-- Firebase SDK -->
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+
+  <!-- Main CSS -->
+  <link rel="stylesheet" href="css/index.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="s-header" id="header">
+    <div class="header-inner">
+      <div class="header-logo">
+        <a href="/">
+          <img src="images/IF-favicon.png" alt="Imaan Fihlani" />
+          <span class="logo-name">Imaan<span>Fihlani</span></span>
+        </a>
+      </div>
+      <nav class="header-nav-wrap" id="navWrap">
+        <ul class="header-nav">
+          <li><a href="/" class="active">Home</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#portfolio">Portfolio</a></li>
+          <li><a href="/blog">Blog</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </nav>
+      <button class="header-menu-toggle" id="menuToggle" aria-label="Toggle menu">
+        <span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- ===== MAIN CONTENT ===== -->
+  <main id="app">
+
+    <!-- HOME / HERO -->
+    <section id="home" class="s-home target-section">
+      <div class="home-overlay"></div>
+      <div class="home-content">
+        <div class="home-content-inner">
+          <h3 class="home-subtitle">Refined Social Strategy</h3>
+          <h1 class="home-title">For Brands That Lead</h1>
+          <p class="home-desc">
+            Luxury‑led social media strategy for brands that want clarity, consistency, &amp; results.
+          </p>
+          <div class="home-buttons">
+            <a href="#contact" class="btn btn--gold smoothscroll">Work With Me</a>
+            <a href="#services" class="btn btn--outline smoothscroll">View Services</a>
+          </div>
+        </div>
+      </div>
+      <div class="home-scroll">
+        <a href="#about" class="smoothscroll">
+          <span>Scroll</span>
+          <i class="fas fa-chevron-down"></i>
+        </a>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about" class="s-about target-section">
+      <div class="container">
+        <div class="about-grid">
+          <div class="about-image reveal reveal-left">
+            <img src="images/imaan-fihlani.jpg" alt="Imaan Fihlani" />
+          </div>
+          <div class="about-text reveal">
+            <h3>About</h3>
+            <h2>I help modern brands show up with intention.</h2>
+            <p class="lead">
+              As a social media strategist, I work with ambitious brands to create digital presence that feels aligned, elevated, and effective.
+              Every strategy is built with purpose, ensuring your brand is seen, remembered, and trusted.
+              Through tailored approaches and data‑driven insights, I transform social media from a marketing channel into a powerful brand asset.
+            </p>
+            <a href="#services" class="btn btn--gold smoothscroll">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SERVICES -->
+    <section id="services" class="s-services target-section">
+      <div class="container">
+        <div class="section-intro reveal">
+          <h3>Signature Services</h3>
+          <h2>Premium social media solutions for luxury brands seeking exceptional results</h2>
+        </div>
+        <div class="services-grid reveal-stagger">
+          <!-- Service 1 -->
+          <div class="service-card">
+            <img src="images/brand-strategy.jpg" alt="Brand Strategy" class="service-img" />
+            <div class="service-icon"><i class="fas fa-compass"></i></div>
+            <h4>Brand Strategy</h4>
+            <p class="service-short">Build a brand with clarity, consistency, and purpose.</p>
+            <div class="service-full">
+              <p>Every successful brand begins with a clear strategy. I work closely with businesses to define their positioning, refine their messaging, and establish a brand identity that resonates with the right audience. By understanding your goals, values, and market, I help create a strategic foundation that guides every marketing decision and ensures your brand is recognised, remembered, and trusted across every touchpoint.</p>
+            </div>
+            <a href="#" class="service-link toggle-service">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+
+          <!-- Service 2 -->
+          <div class="service-card">
+            <img src="images/service-content.jpg" alt="Content Strategy &amp; Direction" class="service-img" />
+            <div class="service-icon"><i class="fas fa-pen-fancy"></i></div>
+            <h4>Content Strategy &amp; Creative Direction</h4>
+            <p class="service-short">Content with intention. Creativity with purpose.</p>
+            <div class="service-full">
+              <p>Exceptional content starts long before the design process. I develop content strategies that align with your business goals, identify the stories your audience wants to hear, and provide creative direction that keeps your brand visually and strategically consistent. From campaign concepts and content planning to copywriting and visual guidance, every piece of content is created to strengthen your brand, capture attention, and encourage genuine engagement.</p>
+            </div>
+            <a href="#" class="service-link toggle-service">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+
+          <!-- Service 3 -->
+          <div class="service-card">
+            <img src="images/service-management.jpg" alt="Social Media Management" class="service-img" />
+            <div class="service-icon"><i class="fas fa-chart-line"></i></div>
+            <h4>Social Media Management</h4>
+            <p class="service-short">Strategic management that keeps your brand visible.</p>
+            <div class="service-full">
+              <p>Social media should be more than simply posting content, it should support your business objectives. I manage your social media presence through thoughtful planning, content scheduling, community engagement, and ongoing performance analysis. Every decision is guided by strategy, ensuring your brand remains active, consistent, and relevant while building meaningful relationships with your audience and driving sustainable growth.</p>
+            </div>
+            <a href="#" class="service-link toggle-service">Learn More <i class="fas fa-arrow-right"></i></a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PORTFOLIO -->
+    <section id="portfolio" class="s-portfolio target-section">
+      <div class="container">
+        <!-- Featured In -->
+        <div class="section-intro reveal">
+          <h3>Featured In</h3>
+          <h2>Trusted by brands that lead</h2>
+        </div>
+        <div class="client-carousel-wrapper reveal-stagger">
+          <div class="client-carousel" id="clientCarousel">
+            <!-- Injected by JS -->
+          </div>
+          <div class="carousel-hint">Hover to pause · Click to explore</div>
+        </div>
+
+        <div style="height: 4rem;"></div>
+
+        <!-- Kind Words -->
+        <div class="section-intro reveal">
+          <h3>Kind Words</h3>
+          <h2>What clients say about working with me</h2>
+        </div>
+        <div class="testimonial-carousel-wrapper reveal-stagger">
+          <div class="testimonial-carousel" id="testimonialCarousel">
+            <!-- Injected by JS -->
+          </div>
+          <div class="carousel-hint">Hover to pause · Click to read more</div>
+        </div>
+
+        <!-- Modal -->
+        <div class="modal" id="clientModal">
+          <div class="modal-content">
+            <button class="modal-close" id="modalClose">&times;</button>
+            <div class="modal-body">
+              <img id="modalLogo" src="" alt="Client Logo" />
+              <h3 id="modalName"></h3>
+              <p id="modalDesc"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== BLOG ===== -->
+    <section id="blog" class="s-blog target-section">
+      <div class="container">
+        <div id="blogContent">
+          <!-- Blog content rendered by JavaScript -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== CONTACT ===== -->
+    <section id="contact" class="s-contact target-section">
+      <div class="container">
+        <div class="section-intro reveal">
+          <h3>Connect</h3>
+          <h2>Let’s shape a presence worthy of your brand.</h2>
+          <p>Complete the form below and I’ll be in touch within 24 hours</p>
+        </div>
+        <div class="contact-wrapper reveal">
+          <form id="contactForm">
+            <div class="form-row">
+              <div class="form-field">
+                <label for="contactName">Full Name *</label>
+                <input type="text" id="contactName" name="name" placeholder="e.g. Jane Doe" required />
+              </div>
+              <div class="form-field">
+                <label for="contactEmail">Email Address *</label>
+                <input type="email" id="contactEmail" name="email" placeholder="jane@example.com" required />
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-field">
+                <label for="contactPhone">Contact Number *</label>
+                <input type="tel" id="contactPhone" name="phone" placeholder="+1 234 567 890" required />
+              </div>
+              <div class="form-field">
+                <label for="contactCompany">Company Name</label>
+                <input type="text" id="contactCompany" name="company" placeholder="Your company" />
+              </div>
+            </div>
+            
+            <div class="form-row">
+              <div class="form-field">
+                <label for="contactCurrency">Currency</label>
+                <select id="contactCurrency" name="currency">
+                  <option value="USD">US Dollar ($)</option>
+                  <option value="GBP">UK Pound (£)</option>
+                  <option value="ZAR" selected>South African Rand (R)</option>
+                </select>
+              </div>
+              <div class="form-field">
+                <label for="contactBudget">Select budget range</label>
+                <select id="contactBudget" name="budget">
+                  <option value="">– Please select –</option>
+                  <option value="< $1,000">&lt; $1,000</option>
+                  <option value="$1,000 – $3,000">$1,000 – $3,000</option>
+                  <option value="$3,000 – $6,000">$3,000 – $6,000</option>
+                  <option value="$6,000 – $10,000">$6,000 – $10,000</option>
+                  <option value="$10,000+">$10,000+</option>
+                </select>
+              </div>
+            </div>
+
+            <!-- CHANGED SECTION BELOW -->
+            <div class="form-field">
+              <label for="contactMessage">Project Details *</label>
+              <textarea id="contactMessage" name="message" rows="5" placeholder="Tell us about your project, goals, and timeline..." required></textarea>
+            </div>
+            
+            <div style="text-align: center;">
+              <button type="submit" class="btn btn--gold btn--large">Apply to work with me</button>
+            </div>
+            <div id="formStatus" class="form-status" style="text-align:center; margin-top:1rem;"></div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="s-footer">
+    <div class="container">
+      <div class="footer-logo">
+        <img src="images/IF-favicon.png" alt="Imaan Fihlani" />
+        <span class="logo-name">Imaan Fihlani</span>
+      </div>
+      <p class="footer-copy">
+        &copy; 2026 Imaan Fihlani Media. All rights reserved.
+      </p>
+      <div class="footer-social">
+        <a href="https://www.instagram.com/imaanfihlani_?igsh=b3FnamFoOHhlMXlz" target="_blank" rel="noopener noreferrer" aria-label="Instagram">
+          <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/lindelwa-imaan-fihlani-599bb1151" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+        <a href="https://www.facebook.com/lindelwa.fihlani" target="_blank" rel="noopener noreferrer" aria-label="Facebook">
+          <i class="fab fa-facebook-f"></i>
+        </a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Back to top -->
+  <a href="#home" id="goTop" class="go-top smoothscroll"><i class="fas fa-chevron-up"></i></a>
+
+  <!-- ===== SCRIPTS ===== -->
+  <script src="js/index.js"></script>
+</body>
+</html>
